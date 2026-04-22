@@ -17,7 +17,7 @@
                                 invisible="state != 'draft'"/>
                         <button name="action_apply_adjustments" string="Apply Adjustments"
                                 type="object"
-                                groups="Nest_vansales_warehouse.group_vansales_manager"
+                                groups="nest_vansales.group_vansales_manager"
                                 invisible="state != 'confirmed'"/>
                         <button name="action_done" string="Close Audit"
                                 type="object"

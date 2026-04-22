@@ -1,4 +1,6 @@
-# Nest Van Sales – Warehouse (`Nest_vansales_warehouse`)
+# Nest Van Sales (`nest_vansales`)
+
+> **Note:** The addon technical name (folder name) was renamed from `Nest_vansales_warehouse` to `nest_vansales` to follow Odoo lowercase-underscore naming conventions.
 
 **Odoo 19 Community Edition – MVP Skeleton**
 
@@ -26,7 +28,7 @@ Van Sales module for field sales operations using a separate Odoo warehouse per 
 
 ## Installation
 
-1. Copy the `Nest_vansales_warehouse` directory into your Odoo addons path.
+1. Copy the `nest_vansales` directory into your Odoo addons path.
 2. Update the addons list (Settings → Technical → Update Apps List).
 3. Install **Nest Van Sales – Warehouse** from the Apps menu.
 
