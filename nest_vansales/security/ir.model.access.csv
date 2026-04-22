@@ -1,0 +1,20 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_vansales_van_user,vansales.van user,model_vansales_van,nest_vansales.group_vansales_user,1,0,0,0
+access_vansales_van_manager,vansales.van manager,model_vansales_van,nest_vansales.group_vansales_manager,1,1,1,1
+access_vansales_receipt_user,vansales.receipt user,model_vansales_receipt,nest_vansales.group_vansales_user,1,1,1,0
+access_vansales_receipt_manager,vansales.receipt manager,model_vansales_receipt,nest_vansales.group_vansales_manager,1,1,1,1
+access_vansales_receipt_line_user,vansales.receipt.line user,model_vansales_receipt_line,nest_vansales.group_vansales_user,1,1,1,0
+access_vansales_receipt_line_manager,vansales.receipt.line manager,model_vansales_receipt_line,nest_vansales.group_vansales_manager,1,1,1,1
+access_vansales_audit_user,vansales.audit user,model_vansales_audit,nest_vansales.group_vansales_user,1,1,1,0
+access_vansales_audit_manager,vansales.audit manager,model_vansales_audit,nest_vansales.group_vansales_manager,1,1,1,1
+access_vansales_audit_line_user,vansales.audit.line user,model_vansales_audit_line,nest_vansales.group_vansales_user,1,1,1,0
+access_vansales_audit_line_manager,vansales.audit.line manager,model_vansales_audit_line,nest_vansales.group_vansales_manager,1,1,1,1
+access_vansales_sync_batch_user,vansales.sync.batch user,model_vansales_sync_batch,nest_vansales.group_vansales_user,1,1,1,0
+access_vansales_sync_batch_manager,vansales.sync.batch manager,model_vansales_sync_batch,nest_vansales.group_vansales_manager,1,1,1,1
+access_van_load_wizard_user,vansales.van.load.wizard user,model_vansales_van_load_wizard,nest_vansales.group_vansales_user,1,1,1,1
+access_van_load_wizard_line_user,vansales.van.load.wizard.line user,model_vansales_van_load_wizard_line,nest_vansales.group_vansales_user,1,1,1,1
+access_van_unload_wizard_user,vansales.van.unload.wizard user,model_vansales_van_unload_wizard,nest_vansales.group_vansales_user,1,1,1,1
+access_van_unload_wizard_line_user,vansales.van.unload.wizard.line user,model_vansales_van_unload_wizard_line,nest_vansales.group_vansales_user,1,1,1,1
+access_van_return_wizard_user,vansales.van.return.wizard user,model_vansales_van_return_wizard,nest_vansales.group_vansales_user,1,1,1,1
+access_van_return_wizard_line_user,vansales.van.return.wizard.line user,model_vansales_van_return_wizard_line,nest_vansales.group_vansales_user,1,1,1,1
+access_van_audit_wizard_user,vansales.audit.wizard user,model_vansales_audit_wizard,nest_vansales.group_vansales_user,1,1,1,1

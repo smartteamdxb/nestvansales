@@ -16,8 +16,8 @@
             <field name="domain">[('active', '=', True)]</field>
             <field name="context">{'search_default_my_van': 1}</field>
             <field name="view_ids" eval="[(5, 0, 0),
-                (0, 0, {'view_mode': 'kanban', 'view_id': ref('Nest_vansales_warehouse.view_vansales_van_kanban')}),
-                (0, 0, {'view_mode': 'list',   'view_id': ref('Nest_vansales_warehouse.view_vansales_van_list')}),
+                (0, 0, {'view_mode': 'kanban', 'view_id': ref('nest_vansales.view_vansales_van_kanban')}),
+                (0, 0, {'view_mode': 'list',   'view_id': ref('nest_vansales.view_vansales_van_list')}),
             ]"/>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
