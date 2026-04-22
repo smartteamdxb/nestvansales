@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ── Audit Form ──────────────────────────────────────────────────── -->
+        <record id="view_vansales_audit_form" model="ir.ui.view">
+            <field name="name">vansales.audit.form</field>
+            <field name="model">vansales.audit</field>
+            <field name="arch" type="xml">
+                <form string="Van Audit">
+                    <header>
+                        <button name="action_generate_lines" string="Generate Lines"
+                                type="object" class="btn-primary"
+                                invisible="state != 'draft'"/>
+                        <button name="action_confirm" string="Confirm"
+                                type="object"
+                                invisible="state != 'draft'"/>
+                        <button name="action_apply_adjustments" string="Apply Adjustments"
+                                type="object"
+                                groups="Nest_vansales_warehouse.group_vansales_manager"
+                                invisible="state != 'confirmed'"/>
+                        <button name="action_done" string="Close Audit"
+                                type="object"
+                                invisible="state not in ('confirmed', 'adjusted')"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,confirmed,adjusted,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="van_id" readonly="state != 'draft'"/>
+                                <field name="warehouse_id" readonly="1"/>
+                                <field name="date"/>
+                                <field name="user_id" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="line_count" string="Lines" readonly="1"/>
+                                <field name="notes"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Audit Lines">
+                                <field name="line_ids" widget="one2many"
+                                       readonly="state in ('confirmed', 'adjusted', 'done')">
+                                    <list editable="bottom">
+                                        <field name="product_id"/>
+                                        <field name="lot_id" optional="hide"/>
+                                        <field name="location_id" readonly="1"/>
+                                        <field name="uom_id" readonly="1"/>
+                                        <field name="qty_system" readonly="1"/>
+                                        <field name="qty_counted"/>
+                                        <field name="qty_diff" readonly="1"
+                                               decoration-danger="qty_diff != 0"
+                                               decoration-success="qty_diff == 0"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- ── Audit List ──────────────────────────────────────────────────── -->
+        <record id="view_vansales_audit_list" model="ir.ui.view">
+            <field name="name">vansales.audit.list</field>
+            <field name="model">vansales.audit</field>
+            <field name="arch" type="xml">
+                <list string="Van Audits"
+                      decoration-info="state == 'draft'"
+                      decoration-warning="state == 'confirmed'"
+                      decoration-success="state == 'done'">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="van_id"/>
+                    <field name="warehouse_id"/>
+                    <field name="user_id"/>
+                    <field name="line_count" string="Lines"/>
+                    <field name="state" widget="badge"
+                           decoration-info="state == 'draft'"
+                           decoration-warning="state in ('confirmed', 'adjusted')"
+                           decoration-success="state == 'done'"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- ── Audit Action ────────────────────────────────────────────────── -->
+        <record id="action_vansales_audit" model="ir.actions.act_window">
+            <field name="name">Van Audits</field>
+            <field name="res_model">vansales.audit</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No van audits yet.
+                </p>
+                <p>Van audits capture stock snapshots and variance checks.</p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

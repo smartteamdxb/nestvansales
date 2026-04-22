@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ══════════════════════════════════════════════════════════════════
+             Van Sales Mobile Dashboard
+             A tile / kanban view used as the main entry point for
+             salespersons on mobile devices.
+        ══════════════════════════════════════════════════════════════════════ -->
+
+        <!-- Dashboard action – opens Van kanban for quick access -->
+        <record id="action_vansales_dashboard" model="ir.actions.act_window">
+            <field name="name">Van Sales Dashboard</field>
+            <field name="res_model">vansales.van</field>
+            <field name="view_mode">kanban,list</field>
+            <field name="domain">[('active', '=', True)]</field>
+            <field name="context">{'search_default_my_van': 1}</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'kanban', 'view_id': ref('Nest_vansales_warehouse.view_vansales_van_kanban')}),
+                (0, 0, {'view_mode': 'list',   'view_id': ref('Nest_vansales_warehouse.view_vansales_van_list')}),
+            ]"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No vans assigned to you yet.
+                </p>
+                <p>
+                    Contact your Van Sales Manager to get assigned to a van.
+                </p>
+            </field>
+        </record>
+
+        <!-- Search view with "My Van" default filter -->
+        <record id="view_vansales_van_search" model="ir.ui.view">
+            <field name="name">vansales.van.search</field>
+            <field name="model">vansales.van</field>
+            <field name="arch" type="xml">
+                <search string="Vans">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="user_id"/>
+                    <filter string="My Van" name="my_van"
+                            domain="[('user_id', '=', uid)]"/>
+                    <filter string="Active" name="active"
+                            domain="[('active', '=', True)]"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="Driver" name="group_driver"
+                                context="{'group_by': 'user_id'}"/>
+                        <filter string="Warehouse" name="group_warehouse"
+                                context="{'group_by': 'warehouse_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- ── vansales.van ────────────────────────────────────────────────── -->
+
+        <!-- User: can only see vans assigned to them -->
+        <record id="rule_vansales_van_user" model="ir.rule">
+            <field name="name">Van Sales Van: User sees own van</field>
+            <field name="model_id" ref="model_vansales_van"/>
+            <field name="groups" eval="[(4, ref('group_vansales_user'))]"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Manager: sees all vans in their company -->
+        <record id="rule_vansales_van_manager" model="ir.rule">
+            <field name="name">Van Sales Van: Manager sees all</field>
+            <field name="model_id" ref="model_vansales_van"/>
+            <field name="groups" eval="[(4, ref('group_vansales_manager'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+        </record>
+
+        <!-- ── vansales.receipt ────────────────────────────────────────────── -->
+
+        <!-- User: can only see receipts they created or belong to their van -->
+        <record id="rule_vansales_receipt_user" model="ir.rule">
+            <field name="name">Van Sales Receipt: User sees own receipts</field>
+            <field name="model_id" ref="model_vansales_receipt"/>
+            <field name="groups" eval="[(4, ref('group_vansales_user'))]"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Manager: sees all receipts -->
+        <record id="rule_vansales_receipt_manager" model="ir.rule">
+            <field name="name">Van Sales Receipt: Manager sees all</field>
+            <field name="model_id" ref="model_vansales_receipt"/>
+            <field name="groups" eval="[(4, ref('group_vansales_manager'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+        </record>
+
+        <!-- ── vansales.audit ──────────────────────────────────────────────── -->
+
+        <!-- User: can only see audits they created -->
+        <record id="rule_vansales_audit_user" model="ir.rule">
+            <field name="name">Van Sales Audit: User sees own audits</field>
+            <field name="model_id" ref="model_vansales_audit"/>
+            <field name="groups" eval="[(4, ref('group_vansales_user'))]"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Manager: sees all audits -->
+        <record id="rule_vansales_audit_manager" model="ir.rule">
+            <field name="name">Van Sales Audit: Manager sees all</field>
+            <field name="model_id" ref="model_vansales_audit"/>
+            <field name="groups" eval="[(4, ref('group_vansales_manager'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+        </record>
+
+        <!-- ── vansales.sync.batch ─────────────────────────────────────────── -->
+
+        <!-- User: can only see their own sync batches -->
+        <record id="rule_vansales_sync_batch_user" model="ir.rule">
+            <field name="name">Van Sales Sync Batch: User sees own batches</field>
+            <field name="model_id" ref="model_vansales_sync_batch"/>
+            <field name="groups" eval="[(4, ref('group_vansales_user'))]"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+        </record>
+
+        <!-- Manager: sees all sync batches -->
+        <record id="rule_vansales_sync_batch_manager" model="ir.rule">
+            <field name="name">Van Sales Sync Batch: Manager sees all</field>
+            <field name="model_id" ref="model_vansales_sync_batch"/>
+            <field name="groups" eval="[(4, ref('group_vansales_manager'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+        </record>
+
+    </data>
+</odoo>
