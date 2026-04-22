@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ══════════════════════════════════════════════════════════════════
+             Van Load Wizard
+        ══════════════════════════════════════════════════════════════════════ -->
+        <record id="view_van_load_wizard_form" model="ir.ui.view">
+            <field name="name">vansales.van.load.wizard.form</field>
+            <field name="model">vansales.van.load.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Load Van">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="van_id"/>
+                                <field name="source_warehouse_id"/>
+                                <field name="scheduled_date"/>
+                            </group>
+                            <group>
+                                <field name="source_location_id"/>
+                                <field name="dest_location_id"/>
+                            </group>
+                        </group>
+                        <field name="line_ids" widget="one2many">
+                            <list editable="bottom">
+                                <field name="product_id"/>
+                                <field name="quantity"/>
+                                <field name="uom_id"/>
+                            </list>
+                        </field>
+                    </sheet>
+                    <footer>
+                        <button name="action_create_transfer" string="Create Transfer"
+                                type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_van_load_wizard" model="ir.actions.act_window">
+            <field name="name">Load Van</field>
+            <field name="res_model">vansales.van.load.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════════
+             Van Unload Wizard
+        ══════════════════════════════════════════════════════════════════════ -->
+        <record id="view_van_unload_wizard_form" model="ir.ui.view">
+            <field name="name">vansales.van.unload.wizard.form</field>
+            <field name="model">vansales.van.unload.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Unload Van">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="van_id"/>
+                                <field name="scheduled_date"/>
+                            </group>
+                            <group>
+                                <field name="source_location_id"/>
+                                <field name="dest_location_id"/>
+                            </group>
+                        </group>
+                        <field name="line_ids" widget="one2many">
+                            <list editable="bottom">
+                                <field name="product_id"/>
+                                <field name="quantity"/>
+                                <field name="uom_id"/>
+                            </list>
+                        </field>
+                    </sheet>
+                    <footer>
+                        <button name="action_create_transfer" string="Create Transfer"
+                                type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_van_unload_wizard" model="ir.actions.act_window">
+            <field name="name">Unload Van</field>
+            <field name="res_model">vansales.van.unload.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════════
+             Van Return Wizard
+        ══════════════════════════════════════════════════════════════════════ -->
+        <record id="view_van_return_wizard_form" model="ir.ui.view">
+            <field name="name">vansales.van.return.wizard.form</field>
+            <field name="model">vansales.van.return.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Customer Return">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="van_id"/>
+                                <field name="partner_id"/>
+                                <field name="origin_sale_id"/>
+                            </group>
+                            <group>
+                                <field name="return_location_id"/>
+                                <field name="scheduled_date"/>
+                                <field name="reason"/>
+                            </group>
+                        </group>
+                        <field name="line_ids" widget="one2many">
+                            <list editable="bottom">
+                                <field name="product_id"/>
+                                <field name="quantity"/>
+                                <field name="uom_id"/>
+                            </list>
+                        </field>
+                    </sheet>
+                    <footer>
+                        <button name="action_create_return" string="Create Return"
+                                type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_van_return_wizard" model="ir.actions.act_window">
+            <field name="name">Customer Return</field>
+            <field name="res_model">vansales.van.return.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════════════════
+             Van Audit Wizard
+        ══════════════════════════════════════════════════════════════════════ -->
+        <record id="view_van_audit_wizard_form" model="ir.ui.view">
+            <field name="name">vansales.audit.wizard.form</field>
+            <field name="model">vansales.audit.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Start Van Audit">
+                    <sheet>
+                        <group>
+                            <field name="van_id"/>
+                            <field name="notes"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_generate_audit" string="Generate Audit"
+                                type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_van_audit_wizard" model="ir.actions.act_window">
+            <field name="name">Start Van Audit</field>
+            <field name="res_model">vansales.audit.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

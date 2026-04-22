@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ── Sync Batch List ─────────────────────────────────────────────── -->
+        <record id="view_vansales_sync_batch_list" model="ir.ui.view">
+            <field name="name">vansales.sync.batch.list</field>
+            <field name="model">vansales.sync.batch</field>
+            <field name="arch" type="xml">
+                <list string="Sync Batches"
+                      decoration-danger="state == 'failed'"
+                      decoration-warning="state in ('received', 'processing')"
+                      decoration-success="state == 'processed'">
+                    <field name="name"/>
+                    <field name="received_at"/>
+                    <field name="device_id"/>
+                    <field name="van_id"/>
+                    <field name="user_id"/>
+                    <field name="state" widget="badge"
+                           decoration-success="state == 'processed'"
+                           decoration-warning="state in ('received', 'processing')"
+                           decoration-danger="state == 'failed'"/>
+                    <field name="message" optional="hide"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- ── Sync Batch Form ─────────────────────────────────────────────── -->
+        <record id="view_vansales_sync_batch_form" model="ir.ui.view">
+            <field name="name">vansales.sync.batch.form</field>
+            <field name="model">vansales.sync.batch</field>
+            <field name="arch" type="xml">
+                <form string="Sync Batch" create="false" edit="false">
+                    <sheet>
+                        <group>
+                            <group string="Batch Info">
+                                <field name="name" readonly="1"/>
+                                <field name="received_at" readonly="1"/>
+                                <field name="device_id" readonly="1"/>
+                                <field name="van_id" readonly="1"/>
+                                <field name="user_id" readonly="1"/>
+                                <field name="state" readonly="1" widget="badge"/>
+                            </group>
+                            <group string="Payload">
+                                <field name="payload_hash" readonly="1"/>
+                                <field name="message" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Created Records">
+                            <field name="created_order_ids_json" readonly="1" string="Orders (JSON)"/>
+                            <field name="created_receipt_ids_json" readonly="1" string="Receipts (JSON)"/>
+                        </group>
+                        <group string="Raw Payload" groups="base.group_no_one">
+                            <field name="raw_payload" readonly="1" widget="text"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- ── Sync Batch Action ───────────────────────────────────────────── -->
+        <record id="action_vansales_sync_logs" model="ir.actions.act_window">
+            <field name="name">Sync Logs</field>
+            <field name="res_model">vansales.sync.batch</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{'create': False}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No sync batches received yet.
+                </p>
+                <p>Sync logs record every batch submitted from mobile devices.</p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

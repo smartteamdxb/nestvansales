@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ── Van Form View ──────────────────────────────────────────────── -->
+        <record id="view_vansales_van_form" model="ir.ui.view">
+            <field name="name">vansales.van.form</field>
+            <field name="model">vansales.van</field>
+            <field name="arch" type="xml">
+                <form string="Van">
+                    <header>
+                        <button name="action_van_load" string="Load Van" type="object"
+                                class="btn-primary"/>
+                        <button name="action_van_unload" string="Unload Van" type="object"/>
+                        <button name="action_van_audit" string="Start Audit" type="object"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_orders" type="object"
+                                    class="oe_stat_button" icon="fa-shopping-cart">
+                                <field name="sale_order_count" widget="statinfo" string="Orders"/>
+                            </button>
+                            <button name="action_view_receipts" type="object"
+                                    class="oe_stat_button" icon="fa-money">
+                                <field name="receipt_count" widget="statinfo" string="Receipts"/>
+                            </button>
+                        </div>
+                        <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
+                                invisible="active"/>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="Van Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Identity">
+                                <field name="code"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="user_id"/>
+                                <field name="active" invisible="1"/>
+                            </group>
+                            <group string="Warehouses">
+                                <field name="warehouse_id"/>
+                                <field name="main_warehouse_id"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Pricelists">
+                                <field name="pricelist_retail_id"/>
+                                <field name="pricelist_wholesale_id"/>
+                            </group>
+                            <group string="Settings">
+                                <field name="allow_negative_stock"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Payment Journals">
+                                <group>
+                                    <group>
+                                        <field name="cash_journal_id"/>
+                                        <field name="bank_journal_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="visa_journal_id"/>
+                                        <field name="mastercard_journal_id"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- ── Van List View ──────────────────────────────────────────────── -->
+        <record id="view_vansales_van_list" model="ir.ui.view">
+            <field name="name">vansales.van.list</field>
+            <field name="model">vansales.van</field>
+            <field name="arch" type="xml">
+                <list string="Vans">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="warehouse_id"/>
+                    <field name="main_warehouse_id"/>
+                    <field name="pricelist_retail_id" optional="hide"/>
+                    <field name="pricelist_wholesale_id" optional="hide"/>
+                    <field name="allow_negative_stock"/>
+                    <field name="active" column_invisible="True"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- ── Van Kanban View ─────────────────────────────────────────────── -->
+        <record id="view_vansales_van_kanban" model="ir.ui.view">
+            <field name="name">vansales.van.kanban</field>
+            <field name="model">vansales.van</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="" class="o_kanban_mobile">
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="user_id"/>
+                    <field name="sale_order_count"/>
+                    <field name="receipt_count"/>
+                    <templates>
+                        <t t-name="card">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_record_headings">
+                                        <strong class="o_kanban_record_title">
+                                            <field name="code"/> – <field name="name"/>
+                                        </strong>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_body">
+                                    <field name="user_id" widget="many2one_avatar_user"/>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <span><i class="fa fa-shopping-cart"/> <field name="sale_order_count"/> Orders</span>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <span><i class="fa fa-money"/> <field name="receipt_count"/> Receipts</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- ── Van Action ──────────────────────────────────────────────────── -->
+        <record id="action_vansales_van" model="ir.actions.act_window">
+            <field name="name">Vans</field>
+            <field name="res_model">vansales.van</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="context">{'search_default_active': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first Van!
+                </p>
+                <p>
+                    Each van represents a mobile sales unit with its own warehouse,
+                    pricelists and payment journals.
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

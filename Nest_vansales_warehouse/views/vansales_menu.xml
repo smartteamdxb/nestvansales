@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ══════════════════════════════════════════════════════════════════
+             Van Sales – Main Menu
+        ══════════════════════════════════════════════════════════════════════ -->
+        <menuitem id="menu_vansales_root"
+                  name="Van Sales"
+                  sequence="60"
+                  groups="Nest_vansales_warehouse.group_vansales_user"
+                  web_icon="Nest_vansales_warehouse,static/src/img/icon.png"/>
+
+        <!-- ── Dashboard ─────────────────────────────────────────────────── -->
+        <menuitem id="menu_vansales_dashboard"
+                  name="Dashboard"
+                  parent="menu_vansales_root"
+                  action="action_vansales_dashboard"
+                  sequence="10"
+                  groups="Nest_vansales_warehouse.group_vansales_user"/>
+
+        <!-- ── Vans (manager only) ────────────────────────────────────────── -->
+        <menuitem id="menu_vansales_vans"
+                  name="Vans"
+                  parent="menu_vansales_root"
+                  action="action_vansales_van"
+                  sequence="20"
+                  groups="Nest_vansales_warehouse.group_vansales_manager"/>
+
+        <!-- ── Van Orders ─────────────────────────────────────────────────── -->
+        <menuitem id="menu_vansales_orders"
+                  name="Van Orders"
+                  parent="menu_vansales_root"
+                  action="action_vansales_orders"
+                  sequence="30"
+                  groups="Nest_vansales_warehouse.group_vansales_user"/>
+
+        <!-- ── Van Receipts ───────────────────────────────────────────────── -->
+        <menuitem id="menu_vansales_receipts"
+                  name="Van Receipts"
+                  parent="menu_vansales_root"
+                  action="action_vansales_receipts"
+                  sequence="40"
+                  groups="Nest_vansales_warehouse.group_vansales_user"/>
+
+        <!-- ── Transfers ──────────────────────────────────────────────────── -->
+        <menuitem id="menu_vansales_transfers"
+                  name="Transfers"
+                  parent="menu_vansales_root"
+                  sequence="50"
+                  groups="Nest_vansales_warehouse.group_vansales_user"/>
+
+        <menuitem id="menu_vansales_load"
+                  name="Load Van"
+                  parent="menu_vansales_transfers"
+                  action="action_van_load_wizard"
+                  sequence="51"
+                  groups="Nest_vansales_warehouse.group_vansales_user"/>
+
+        <menuitem id="menu_vansales_unload"
+                  name="Unload Van"
+                  parent="menu_vansales_transfers"
+                  action="action_van_unload_wizard"
+                  sequence="52"
+                  groups="Nest_vansales_warehouse.group_vansales_user"/>
+
+        <!-- ── Returns ────────────────────────────────────────────────────── -->
+        <menuitem id="menu_vansales_returns"
+                  name="Returns"
+                  parent="menu_vansales_root"
+                  action="action_van_return_wizard"
+                  sequence="60"
+                  groups="Nest_vansales_warehouse.group_vansales_user"/>
+
+        <!-- ── Audits ─────────────────────────────────────────────────────── -->
+        <menuitem id="menu_vansales_audit"
+                  name="Audit"
+                  parent="menu_vansales_root"
+                  action="action_vansales_audit"
+                  sequence="70"
+                  groups="Nest_vansales_warehouse.group_vansales_user"/>
+
+        <!-- ── Sync Logs (manager only) ───────────────────────────────────── -->
+        <menuitem id="menu_vansales_sync_logs"
+                  name="Sync Logs"
+                  parent="menu_vansales_root"
+                  action="action_vansales_sync_logs"
+                  sequence="80"
+                  groups="Nest_vansales_warehouse.group_vansales_manager"/>
+
+    </data>
+</odoo>

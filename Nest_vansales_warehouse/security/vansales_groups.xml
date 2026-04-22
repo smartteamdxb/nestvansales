@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- ── Module Category ─────────────────────────────────────────────── -->
+        <record id="module_category_vansales" model="ir.module.category">
+            <field name="name">Van Sales</field>
+            <field name="description">Van Sales module – manage van-based field sales operations.</field>
+            <field name="sequence">60</field>
+        </record>
+
+        <!-- ── Van Sales User ──────────────────────────────────────────────── -->
+        <record id="group_vansales_user" model="res.groups">
+            <field name="name">Van Sales User</field>
+            <field name="category_id" ref="module_category_vansales"/>
+            <field name="comment">Can create and view their own van sales orders, receipts, and run transfers for their assigned van.</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <!-- ── Van Sales Manager ───────────────────────────────────────────── -->
+        <record id="group_vansales_manager" model="res.groups">
+            <field name="name">Van Sales Manager</field>
+            <field name="category_id" ref="module_category_vansales"/>
+            <field name="comment">Full access to all vans, orders, receipts, audits and sync logs. Can apply audit adjustments.</field>
+            <field name="implied_ids" eval="[(4, ref('group_vansales_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+
+    </data>
+</odoo>

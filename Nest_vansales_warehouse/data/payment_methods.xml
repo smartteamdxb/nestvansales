@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+            Payment Methods Mapping – placeholder configuration.
+
+            In production you should configure the actual account.journal records
+            on each vansales.van record via the Van form.
+
+            This file documents the expected journal types per payment method:
+
+            payment_method  | journal type
+            ─────────────── | ───────────
+            cash            | cash
+            bank            | bank
+            visa            | bank or cash (card terminal settlement)
+            mastercard      | bank or cash (card terminal settlement)
+
+            TODO: Create per-company default journals if required.
+                  Reference them here using system parameter or van defaults.
+        -->
+    </data>
+</odoo>

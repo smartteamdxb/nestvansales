@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ── Extend sale.order form – Van Sales fields ──────────────────── -->
+        <record id="view_sale_order_form_inherit_vansales" model="ir.ui.view">
+            <field name="name">sale.order.form.vansales</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <!-- Smart button for Van Receipts -->
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_view_van_receipts" type="object"
+                            class="oe_stat_button" icon="fa-money"
+                            invisible="not is_van_sale or van_receipt_count == 0">
+                        <field name="van_receipt_count" widget="statinfo" string="Van Receipts"/>
+                    </button>
+                </xpath>
+
+                <!-- Van Sales section – shown when is_van_sale -->
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <group name="van_sale_header" string="Van Sale"
+                           invisible="not is_van_sale" colspan="2"
+                           col="4">
+                        <field name="is_van_sale" invisible="1"/>
+                        <field name="van_id" string="Van"/>
+                        <field name="sale_mode" string="Sale Mode"/>
+                        <field name="van_warehouse_id" string="Van Warehouse" readonly="1"/>
+                        <field name="source_device_id" string="Device" optional="hide"/>
+                        <field name="external_uid" string="External UID" optional="hide"
+                               readonly="1"/>
+                    </group>
+                </xpath>
+
+                <!-- Checkbox to flag as van sale (near warehouse_id) -->
+                <xpath expr="//field[@name='warehouse_id']" position="after">
+                    <field name="is_van_sale" string="Van Sale"/>
+                    <field name="van_id" string="Van"
+                           invisible="not is_van_sale"
+                           required="is_van_sale"/>
+                    <field name="sale_mode" string="Sale Mode"
+                           invisible="not is_van_sale"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- ── Van Sales Order List ────────────────────────────────────────── -->
+        <record id="view_vansales_order_list" model="ir.ui.view">
+            <field name="name">sale.order.list.vansales</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <list string="Van Orders">
+                    <field name="name"/>
+                    <field name="date_order"/>
+                    <field name="partner_id"/>
+                    <field name="van_id"/>
+                    <field name="sale_mode"/>
+                    <field name="state" widget="badge"
+                           decoration-success="state == 'sale'"
+                           decoration-info="state == 'draft'"
+                           decoration-warning="state == 'sent'"/>
+                    <field name="amount_total" sum="Total"/>
+                    <field name="currency_id" column_invisible="True"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- ── Van Orders Action ───────────────────────────────────────────── -->
+        <record id="action_vansales_orders" model="ir.actions.act_window">
+            <field name="name">Van Orders</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('is_van_sale', '=', True)]</field>
+            <field name="context">{
+                'default_is_van_sale': True,
+                'search_default_is_van_sale': 1
+            }</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('view_vansales_order_list')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('sale.view_order_form')}),
+            ]"/>
+        </record>
+
+    </data>
+</odoo>

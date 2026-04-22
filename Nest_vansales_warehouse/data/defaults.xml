@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+            Default Configuration Notes
+            ════════════════════════════
+
+            Main Warehouse
+            ──────────────
+            The system expects a warehouse with the short code "MAINWH" to exist
+            as the primary supply warehouse.
+
+            If no warehouse with code "MAINWH" is found, the `main_warehouse_id`
+            field on each van must be set manually in the Van form view.
+
+            To create the main warehouse:
+              Inventory → Configuration → Warehouses → New
+                  Name:  Main Warehouse
+                  Short Name: MAINWH
+
+            Van Warehouses
+            ──────────────
+            For each van (up to 10 initially), create a dedicated warehouse:
+              Inventory → Configuration → Warehouses → New
+                  Name:  Van 01
+                  Short Name: VAN01
+              Repeat for VAN02 … VAN10.
+
+            Then create a vansales.van record for each and link:
+              - warehouse_id     → the van warehouse (e.g. VAN01)
+              - main_warehouse_id → MAINWH
+              - user_id          → the assigned driver/salesperson
+              - pricelist_retail_id  → Retail pricelist
+              - pricelist_wholesale_id → Wholesale pricelist
+              - cash_journal_id / bank_journal_id / visa_journal_id / mastercard_journal_id
+
+            Pricelists
+            ──────────
+            Create two pricelists:
+              Sales → Configuration → Pricelists
+                1. Retail Pricelist
+                2. Wholesale Pricelist
+            Enable pricelists: Sales → Configuration → Settings → Pricing → Pricelists.
+        -->
+    </data>
+</odoo>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ── Van Receipt Form ────────────────────────────────────────────── -->
+        <record id="view_vansales_receipt_form" model="ir.ui.view">
+            <field name="name">vansales.receipt.form</field>
+            <field name="model">vansales.receipt</field>
+            <field name="arch" type="xml">
+                <form string="Van Receipt">
+                    <header>
+                        <button name="action_post" string="Post" type="object"
+                                class="btn-primary"
+                                invisible="state not in ('draft', 'pending_sync')"/>
+                        <button name="action_cancel" string="Cancel" type="object"
+                                invisible="state in ('posted', 'cancelled')"/>
+                        <button name="action_reset_draft" string="Reset to Draft" type="object"
+                                invisible="state not in ('cancelled', 'pending_sync')"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,pending_sync,posted"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Receipt Details">
+                                <field name="van_id"/>
+                                <field name="partner_id"/>
+                                <field name="sale_order_id"/>
+                                <field name="date"/>
+                                <field name="user_id"/>
+                            </group>
+                            <group string="Payment">
+                                <field name="payment_method"/>
+                                <field name="journal_id"/>
+                                <field name="currency_id" invisible="1"/>
+                                <field name="amount_total" widget="monetary"/>
+                            </group>
+                        </group>
+                        <group string="Sync Info" groups="Nest_vansales_warehouse.group_vansales_manager">
+                            <group>
+                                <field name="external_uid" readonly="1"/>
+                                <field name="device_id" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Invoice Allocations">
+                                <field name="line_ids" widget="one2many">
+                                    <list editable="bottom">
+                                        <field name="invoice_id"
+                                               domain="[('move_type', '=', 'out_invoice'),
+                                                        ('state', '=', 'posted'),
+                                                        ('partner_id', '=', parent.partner_id)]"/>
+                                        <field name="invoice_amount_residual" readonly="1"/>
+                                        <field name="amount_applied" sum="Total Applied"/>
+                                        <field name="currency_id" column_invisible="True"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- ── Van Receipt List ────────────────────────────────────────────── -->
+        <record id="view_vansales_receipt_list" model="ir.ui.view">
+            <field name="name">vansales.receipt.list</field>
+            <field name="model">vansales.receipt</field>
+            <field name="arch" type="xml">
+                <list string="Van Receipts"
+                      decoration-info="state == 'draft'"
+                      decoration-warning="state == 'pending_sync'"
+                      decoration-success="state == 'posted'"
+                      decoration-danger="state == 'cancelled'">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="van_id"/>
+                    <field name="partner_id"/>
+                    <field name="sale_order_id" optional="show"/>
+                    <field name="payment_method"/>
+                    <field name="amount_total" sum="Total"/>
+                    <field name="currency_id" column_invisible="True"/>
+                    <field name="state" widget="badge"
+                           decoration-success="state == 'posted'"
+                           decoration-warning="state == 'pending_sync'"
+                           decoration-info="state == 'draft'"
+                           decoration-danger="state == 'cancelled'"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- ── Van Receipt Action ──────────────────────────────────────────── -->
+        <record id="action_vansales_receipts" model="ir.actions.act_window">
+            <field name="name">Van Receipts</field>
+            <field name="res_model">vansales.receipt</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No van receipts yet.
+                </p>
+                <p>Van receipts capture payments collected in the field.</p>
+            </field>
+        </record>
+
+    </data>
+</odoo>
