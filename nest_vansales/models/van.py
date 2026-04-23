@@ -8,7 +8,7 @@ class VansalesVan(models.Model):
     Represents a Van in the Van Sales module.
 
     Each van is associated with a dedicated Odoo warehouse (van warehouse)
-    and linked to a main/supply warehouse (MAINWH by default).  The van
+    and linked to a main/supply warehouse (MAINW by default).  The van
     master record ties together:
       - assigned salesperson / driver
       - retail and wholesale pricelists
@@ -55,7 +55,7 @@ class VansalesVan(models.Model):
     main_warehouse_id = fields.Many2one(
         'stock.warehouse',
         string='Main Warehouse (Supply)',
-        help='Supply / main warehouse (typically MAINWH). '
+        help='Supply / main warehouse (typically MAINW). '
              'Used as source for load transfers.',
     )
 

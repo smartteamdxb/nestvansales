@@ -1,4 +1,4 @@
-# Nest Van Sales – Warehouse (`Nest_vansales_warehouse`)
+# Nest Van Sales – Warehouse (`nest_vansales`)
 
 **Odoo 19 Community Edition – MVP Skeleton**
 
@@ -26,7 +26,7 @@ Van Sales module for field sales operations using a separate Odoo warehouse per 
 
 ## Installation
 
-1. Copy the `Nest_vansales_warehouse` directory into your Odoo addons path.
+1. Copy the `nest_vansales` directory into your Odoo addons path.
 2. Update the addons list (Settings → Technical → Update Apps List).
 3. Install **Nest Van Sales – Warehouse** from the Apps menu.
 
@@ -40,15 +40,15 @@ Van Sales module for field sales operations using a separate Odoo warehouse per 
 
 ## Initial Configuration
 
-### 1. Main Warehouse (MAINWH)
+### 1. Main Warehouse (MAINW)
 
-The module expects a warehouse with the short code **`MAINWH`**.
+The module expects a warehouse with the short code **`MAINW`**.
 
 > Inventory → Configuration → Warehouses → New
 > - Name: `Main Warehouse`
-> - Short Name: `MAINWH`
+> - Short Name: `MAINW`
 
-If a warehouse named MAINWH is not found, set `main_warehouse_id` manually on each Van record.
+If a warehouse named MAINW is not found, set `main_warehouse_id` manually on each Van record.
 
 ### 2. Van Warehouses
 
@@ -79,7 +79,7 @@ For each van set:
 | Van Name | `Van 01` |
 | Driver / Salesperson | assigned user |
 | Van Warehouse | the dedicated van warehouse |
-| Main Warehouse (Supply) | `MAINWH` |
+| Main Warehouse (Supply) | `MAINW` |
 | Retail Pricelist | your retail pricelist |
 | Wholesale Pricelist | your wholesale pricelist |
 | Cash Journal | cash journal for this van |
@@ -102,7 +102,7 @@ For each van set:
 ### Load Van
 1. Van Sales → Transfers → Load Van
 2. Select van and products to load
-3. Click **Create Transfer** – an internal picking is created from MAINWH → Van WH
+3. Click **Create Transfer** – an internal picking is created from MAINW → Van WH
 4. Validate the transfer in Inventory
 
 ### Van Sale
@@ -125,7 +125,7 @@ For each van set:
 
 ### Unload Van (End of Day)
 1. Van Sales → Transfers → Unload Van
-2. Select van and products to return to MAINWH
+2. Select van and products to return to MAINW
 
 ### Audit
 1. Van Sales → Audit → (or wizard from van form)

@@ -7,16 +7,16 @@
 
             Main Warehouse
             ──────────────
-            The system expects a warehouse with the short code "MAINWH" to exist
+            The system expects a warehouse with the short code "MAINW" to exist
             as the primary supply warehouse.
 
-            If no warehouse with code "MAINWH" is found, the `main_warehouse_id`
+            If no warehouse with code "MAINW" is found, the `main_warehouse_id`
             field on each van must be set manually in the Van form view.
 
             To create the main warehouse:
               Inventory → Configuration → Warehouses → New
                   Name:  Main Warehouse
-                  Short Name: MAINWH
+                  Short Name: MAINW
 
             Van Warehouses
             ──────────────
@@ -28,7 +28,7 @@
 
             Then create a vansales.van record for each and link:
               - warehouse_id     → the van warehouse (e.g. VAN01)
-              - main_warehouse_id → MAINWH
+              - main_warehouse_id → MAINW
               - user_id          → the assigned driver/salesperson
               - pricelist_retail_id  → Retail pricelist
               - pricelist_wholesale_id → Wholesale pricelist
