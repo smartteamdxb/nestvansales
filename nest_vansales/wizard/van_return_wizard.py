@@ -30,7 +30,7 @@ class VanReturnWizard(models.TransientModel):
 
     Per business decision: customer returns go back into the van warehouse
     stock (not directly to main WH).  At unload time the van WH stock is
-    returned to MAINWH via the Unload wizard.
+    returned to MAINW via the Unload wizard.
 
     Creates a return incoming picking with destination = van WH stock.
 

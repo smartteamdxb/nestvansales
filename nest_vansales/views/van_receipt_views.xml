@@ -41,7 +41,7 @@
                                 <field name="amount_total" widget="monetary"/>
                             </group>
                         </group>
-                        <group string="Sync Info" groups="Nest_vansales_warehouse.group_vansales_manager">
+                        <group string="Sync Info" groups="nest_vansales.group_vansales_manager">
                             <group>
                                 <field name="external_uid" readonly="1"/>
                                 <field name="device_id" readonly="1"/>

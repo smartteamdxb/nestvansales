@@ -26,7 +26,7 @@ class VanLoadWizardLine(models.TransientModel):
 
 class VanLoadWizard(models.TransientModel):
     """
-    Wizard: Load Van – transfer stock from MAINWH to the van warehouse.
+    Wizard: Load Van – transfer stock from MAINW to the van warehouse.
 
     Creates an internal stock.picking from the main warehouse stock location
     to the van warehouse stock location.

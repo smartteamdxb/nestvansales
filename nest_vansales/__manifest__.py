@@ -15,7 +15,7 @@ Key features (MVP skeleton):
 - Two pricelists: retail / wholesale.
 - Dedicated Van Receipt object that supports allocations across multiple invoices.
 - Returns restock the van warehouse first.
-- Internal transfers to load/unload stock between MAINWH and van warehouses.
+- Internal transfers to load/unload stock between MAINW and van warehouses.
 - Offline-friendly PWA sync API endpoints (idempotent by external_uid).
 - Audit / qty balance check snapshots per van.
 

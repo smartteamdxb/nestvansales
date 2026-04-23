@@ -26,7 +26,7 @@ class VanUnloadWizardLine(models.TransientModel):
 
 class VanUnloadWizard(models.TransientModel):
     """
-    Wizard: Unload Van – transfer remaining/excess stock from van WH back to MAINWH.
+    Wizard: Unload Van – transfer remaining/excess stock from van WH back to MAINW.
 
     Useful at end-of-day or end-of-route to return unsold goods to the
     main warehouse.
